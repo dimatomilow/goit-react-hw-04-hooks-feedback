@@ -1,5 +1,5 @@
 
-import React from 'react'
+import {useState} from 'react'
 import Feedback from './FeedbackOptions/FeedbackOptions';
 import Section from './Section/Section';
 import Statistics from './Statistics/Statistics';
@@ -8,38 +8,48 @@ import Notifications from './Notifications/Notifications'
 import Container from "./Styled/Container";
 import GlobalStyle from "./Styled/GlobalStyled";
 
-class App extends React.Component {
-    state = {
-        good: 0,
-        neutral: 0,
-        bad: 0,
-    };
+export default function App() {
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const[bad,setBad]=useState(0)
 
-    hendleIncrement = (e) => {
-        this.setState(prevState => ({ [e.target.value]: prevState[e.target.value] + 1 }));
-    };
+  const hendleIncrementGood = (e) => {
+      const{name}=e.target
 
-   countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state;
+      switch (name) {
+        case 'good':
+          setGood(state => state + 1)
+          break;
+        case 'neutral':
+          setNeutral(state => state + 1)
+          break;
+        case 'bad':
+          setBad(state => state + 1)
+          break;
+
+        default:
+          break;
+      }
+    }
+
+
+  const countTotalFeedback = () => {
     return good + neutral + bad;
   };
-    countPositiveFeedbackPercentage  = () =>(Math.round(
-      100 * this.state.good / this.countTotalFeedback() - this.state.neutral
+   const countPositiveFeedbackPercentage  = () =>(Math.round(
+      100 * good / countTotalFeedback() - neutral
     ));
 
 
-    render() {
-        const { good, neutral, bad,  } = this.state;
-        const value = Object.keys(this.state)
       return (
         <>
           <GlobalStyle />
           <Container>
           <Section title={'Please leave feedback'}>
-              <Feedback options={value} onLeaveFeedback={ this.hendleIncrement} />
+              <Feedback good={good} neutral={neutral} bad={bad} onLeaveFeedback={ hendleIncrementGood} />
                   </Section>
                   <Section title={'Statistics'}>
-                       {this.countTotalFeedback()>0? <Statistics good={good} neutral={neutral} bad={bad} total={this.countTotalFeedback() } positivePercentage={this.countPositiveFeedbackPercentage()}/>:<Notifications message={'There is no feedback'} />}
+                       {countTotalFeedback()>0? <Statistics good={good} neutral={neutral} bad={bad} total={countTotalFeedback() } positivePercentage={countPositiveFeedbackPercentage()}/>:<Notifications message={'There is no feedback'} />}
 
                  </Section>
             </Container>
@@ -49,6 +59,6 @@ class App extends React.Component {
 
 
 
-}
 
-export default App;
+
+

@@ -2,7 +2,7 @@
   "name": "base-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://dimatomilow.github.io/goit-react-hw-02-feedback",
+  "homepage": "https://dimatomilow.github.io/goit-react-hw-04-hooks-feedback",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -12,7 +12,7 @@
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
     "save": "^2.4.0",
-    "styled-components": "^5.3.3",
+    "styled-components": "^5.3.5",
     "web-vitals": "^2.1.2"
   },
   "scripts": {

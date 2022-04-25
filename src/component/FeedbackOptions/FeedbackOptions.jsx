@@ -1,13 +1,12 @@
 import { Button } from "./FeedbackOptionsStyles";
 
-const Feedback = ({options,onLeaveFeedback}) => {
+const Feedback = ({good, neutral, bad,onLeaveFeedback}) => {
     return (
         <div>
-             {
-            options.map(option =>
-                (<Button key={option} type='button' value={option} onClick={onLeaveFeedback}>{option}</Button>)
-            )
-        }
+                <Button  type='button' name={'good'} value={good} onClick={onLeaveFeedback}>{good}</Button>
+                <Button  type='button'name={'neutral'} value={neutral} onClick={onLeaveFeedback}>{neutral}</Button>
+                <Button  type='button'name={'bad'} value={bad} onClick={onLeaveFeedback}>{bad}</Button>
+
        </div>
     );
 }
