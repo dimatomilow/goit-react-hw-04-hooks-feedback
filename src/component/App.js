@@ -36,8 +36,11 @@ export default function App() {
   const countTotalFeedback = () => {
     return good + neutral + bad;
   };
+  const totalFeedback = countTotalFeedback();
+
+
    const countPositiveFeedbackPercentage  = () =>(Math.round(
-      100 * good / countTotalFeedback() - neutral
+      100 * good / totalFeedback - neutral
     ));
 
 
@@ -49,7 +52,7 @@ export default function App() {
               <Feedback good={good} neutral={neutral} bad={bad} onLeaveFeedback={ hendleIncrementGood} />
                   </Section>
                   <Section title={'Statistics'}>
-                       {countTotalFeedback()>0? <Statistics good={good} neutral={neutral} bad={bad} total={countTotalFeedback() } positivePercentage={countPositiveFeedbackPercentage()}/>:<Notifications message={'There is no feedback'} />}
+                       {totalFeedback>0? <Statistics good={good} neutral={neutral} bad={bad} total={totalFeedback } positivePercentage={countPositiveFeedbackPercentage()}/>:<Notifications message={'There is no feedback'} />}
 
                  </Section>
             </Container>
